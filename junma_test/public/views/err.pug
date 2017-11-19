@@ -1,0 +1,27 @@
+doctype html
+html
+    head
+        title 俊马知识产权
+        script( src='../js/jquery-1.12.4.min.js')
+    body
+        h1=code
+        h2=message
+        h3
+            span(style="color:red;cursor: pointer;") 点击返回登陆页
+    script(type='text/javascript').
+        $('span').on("click", function () {
+            $.ajax(
+                {
+                    "type": "get",
+                    "url": "/layout",
+                    "success": function (resultMsg) {
+                        if (resultMsg.result_code == 0) {
+                            location.href = "login.html"
+                        }
+                    },
+                    "error": function (data) {
+                        console.log(data.err_msg)
+                    }
+                })
+        })
+

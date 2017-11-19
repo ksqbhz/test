@@ -1,0 +1,750 @@
+@charset 'UTF-8';
+
+/*#pagedemo li {*/
+/*display: inline-block;*/
+/*}*/
+
+/*#pagedemo ul {*/
+/*padding-left: 0px;*/
+/*margin: 0 auto;*/
+/*text-align: center;*/
+/*}*/
+
+.showHide {
+    display: none;
+}
+
+.user span {
+    vertical-align: bottom;
+    padding: 3px;
+}
+
+.infomation {
+    margin-top: 6%;
+}
+
+.menu {
+    height: 580px;
+    text-align: left;
+}
+
+a {
+    font-size: 15px;
+    font-family: "Arial Narrow";
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 900;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+}
+
+.right-panel {
+    padding-left: 0px;
+}
+
+.button-ground {
+    clear: left;
+}
+
+body {
+    min-width: 600px;
+}
+
+.bg {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/bg.jpg) no-repeat;
+    background-size: cover;
+}
+
+.title {
+    width: 364px;
+    height: 110px;
+    margin: 0 auto;
+    background: url(../img/title.png) no-repeat center center;
+    background-size: contain;
+    margin-top: 10%;
+}
+
+#VoteCountTh {
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}
+
+.user {
+    margin: -32px 5px 10px;
+    float: right;
+}
+
+.input-center {
+    margin: 0 auto;
+}
+
+.example {
+    width: 41%;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: left;
+    color: white;
+}
+
+.content {
+    font-size: 16px;
+    overflow: auto;
+    width: 100%;
+    height: 465px;
+    margin: 0 auto;
+    border: 0 solid #64b1f5;
+    display: none;
+}
+
+.btn-center {
+    display: none;
+    float: none;
+}
+
+.list-choice {
+
+    font-size: 16px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.list-choice input, .content input, #gobalAll-input {
+    zoom: 120%;
+    -moz-transform: scale(1.2);
+    -moz-transform-origin: top left;
+
+}
+
+.list-choice li {
+    display: inline-block;
+}
+
+.list-choice span {
+    margin-right: 24px;
+}
+
+.divLine {
+    display: inline-block;
+}
+
+.divLine span {
+    margin-right: 30px;
+}
+
+.divLine input {
+    padding-left: 10px;
+}
+
+.selectAll {
+    width: 60%;
+    /*margin: 0 auto;*/
+    margin-top: 10px;
+    padding-left: 40px;
+    text-align: left;
+    display: none;
+}
+
+.list-choice-container > div > input {
+    margin-right: 5px;
+}
+
+.result-list {
+    overflow: hidden;
+    overflow-y: auto;
+    width: 100%;
+    height: 440px;
+    display: none;
+    float: none;
+    margin: 0 auto;
+}
+
+.result-list .table {
+    width: 100%;
+    margin: 0 auto;
+    border: 0px solid white;
+}
+
+.result-list .table > thead th {
+    text-align: center;
+    border-bottom: 0 solid white;
+    border-right: 1px solid white;
+}
+
+.result-list .table > tbody td {
+    border-right: 1px solid white;
+}
+
+.result-list .table > tbody td:nth-child(1), .result-list .table > tbody td:nth-child(2) {
+    text-align: center;
+    width: 12%;
+}
+
+.goback {
+    float: left;
+    margin: 0 auto 15px -15px;
+    display: none;
+}
+
+#manageTab td:nth-child(1) {
+    min-width: 40px;
+!important;
+}
+
+#manageTab td:nth-child(2) {
+    min-width: 45px;
+}
+
+#manageTab td:nth-child(3) {
+    text-align: center;
+    min-width: 75px;
+!important;
+}
+
+#manageTab td:nth-child(4) {
+    /*min-width: 78px;*/
+    word-break: break-all;
+    word-wrap: break-word;
+    min-width: 121px;
+!important;
+}
+
+#manageTab td:nth-child(5) {
+    min-width: 123px;
+!important;
+}
+
+#manageTab td:nth-child(6) {
+    min-width: 90px;
+!important;
+}
+
+#manageTab td:nth-child(7) {
+    min-width: 64px;
+!important;
+}
+
+#manageTab td:nth-child(8) {
+    vertical-align: middle;
+    min-width: 145px;
+!important;
+}
+
+#manageTab td:nth-child(9), #manageTab td:nth-child(13) {
+    vertical-align: middle;
+    min-width: 90px;
+!important;
+}
+
+#manageTab td:nth-child(10), #manageTab td:nth-child(11), #manageTab td:nth-child(14) {
+    vertical-align: middle;
+    min-width: 80px;
+!important;
+}
+
+#manageTab td:nth-child(12) {
+    vertical-align: middle;
+    min-width: 145px;
+!important;
+}
+
+#manageTab td:nth-child(15) {
+    vertical-align: middle;
+    min-width: 60px;
+!important;
+}
+
+#manageTab td:nth-child(16) {
+    vertical-align: middle;
+    min-width: 145px;
+!important;
+}
+
+.mCSB_inside > .mCSB_container {
+    margin-right: 10px !important;
+}
+
+.pageSet {
+    float: none;
+    margin: 0 auto;
+    margin-top: 25px;
+    display: none;
+}
+
+.vote {
+    /*width: 90%;*/
+    height: 400px;
+    display: none;
+    margin: 0 auto;
+}
+
+.vote th:nth-child(1), .vote td:nth-child(1) {
+    /*width: 90%;*/
+    text-align: center;
+}
+
+.vote th:nth-child(2), .vote td:nth-child(2) {
+    /*width: 90%;*/
+    text-align: center;
+}
+
+.vote th:nth-child(3), .vote td:nth-child(3) {
+    /*width: 90%;*/
+    text-align: center;
+}
+
+.vote th:nth-child(4), .vote td:nth-child(4) {
+    /*width: 90%;*/
+    text-align: center;
+}
+
+.vote th:nth-child(5), .vote td:nth-child(5) {
+    /*width: 90%;*/
+    text-align: center;
+}
+
+div#stats {
+    display: none;
+
+}
+
+div#stats h4:nth-child(1) {
+    padding-left: 50px;
+}
+
+div#stats h4:nth-child(2) {
+    padding-left: 35px;
+}
+
+div#stats h4:nth-child(3) {
+    padding-left: 21px;
+}
+
+div.stat {
+    width: 100%;
+    height: 500px;
+    font-size: 15px;
+    overflow: auto;
+}
+
+.stats th {
+    text-align: left;
+    padding-left: 8px;
+}
+
+div#checkResult {
+    display: none;
+}
+
+div#trans {
+    display: none;
+
+}
+
+#trans h2 {
+    margin-left: 63px;
+
+}
+
+div#trans .deal {
+    margin-left: 50px;
+    width: 100%;
+
+}
+
+.DealMar {
+    width: 200px;
+    height: 40px;
+    margin-left: 1%;
+}
+
+.Tarea {
+    width: 77%;
+    height: 100px;
+}
+
+.AddGurMar {
+    margin-left: 13%;
+}
+
+#edits {
+    display: none;
+
+}
+
+#edits h2 {
+    margin-left: 63px;
+
+}
+
+#edits .edit {
+    margin-left: 50px;
+}
+
+#checkSalemanMessage {
+    display: none;
+}
+
+#addSalemanMessage {
+    display: none;
+    margin-left: 5%;
+}
+
+#saleTab th {
+    text-align: center;
+}
+
+.saleTab td {
+    min-width: 55px;
+}
+
+.saleTab td:nth-child(3) {
+    min-width: 75px;
+!important;
+}
+
+.saleTab td:nth-child(5) {
+    min-width: 165px;
+!important;
+}
+
+.saleTab td:nth-child(6) {
+    min-width: 180px;
+!important;
+}
+
+.inp {
+    margin: 50px auto;
+}
+
+.inpMes {
+    margin-top: 2%;
+    margin-left: 20%;
+}
+
+.inpMesitem {
+    margin: 3%;
+}
+
+.addsalebtn {
+    padding-left: 16%;
+}
+
+#updateSalemanMessage {
+    display: none;
+}
+
+#AppUserTab th {
+    text-align: center;
+}
+
+#checkAppUsers {
+    display: none;
+}
+
+#addAppUsers {
+    display: none;
+    margin-left: 5%;
+}
+
+#editAppUsers {
+    display: none;
+}
+
+label input {
+    font-weight: normal;
+}
+
+.addSaleman button, .updateSaleman button, .addAppUser button, .editAppUser button {
+    width: 100px;
+    margin-left: 20%;
+}
+
+/**消息推送**/
+#Information {
+    display: none;
+}
+
+#company {
+    width: 99%;
+    text-align: center;
+    color: white;
+}
+
+/*小屏幕sm 768 <= sm < 992 */
+@media (min-width: 768px) {
+    a {
+        font-size: 16px;
+    }
+
+    .user {
+        margin: 19px 5px -15px;
+    }
+
+    .example {
+        width: 50%;
+
+    }
+
+    .Tarea {
+        width: 85%;
+        height: 100px;
+    }
+
+    .AddGurMar {
+        margin-left: 13%;
+    }
+
+    .saleTab td:nth-child(6) {
+        min-width: 350px;
+    !important;
+    }
+
+    .addsalebtn {
+        padding-left: 6%;
+    }
+}
+
+/*中等屏幕md 992 <=md < 1200 */
+@media (min-width: 992px) {
+    a {
+        font-size: 18px;
+    }
+
+    .input-center {
+        margin: 0 auto;
+    }
+
+    .example {
+        width: 42%;
+    }
+
+    .Tarea {
+        width: 77%;
+        height: 100px;
+    }
+
+    .AddGurMar {
+        margin-left: 11%;
+    }
+
+    .addsalebtn {
+        padding-right: 7%;
+    }
+
+}
+
+/*大屏幕lg 1200 <= lg */
+@media (min-width: 1200px) {
+    .user {
+        margin: 4px 5px 10px;
+        float: right;
+    }
+
+    a {
+        font-size: 17px;
+    }
+
+    .Tarea {
+        width: 73%;
+        height: 100px;
+    }
+
+    .input-center {
+        /*margin: 0 auto 0 170px;*/
+        margin: 0 auto;
+    }
+
+    .example {
+        /*margin: 0 auto 0 144px;*/
+        width: 33%;
+        text-align: left;
+        margin-top: 2%;
+    }
+
+    .AddGurMar {
+        margin-left: 8%;
+    }
+
+    #SendMesBtn {
+        margin-left: 86px;
+    }
+
+    #stats {
+        margin-left: 2%;
+    }
+
+    #Information {
+        margin-left: 150px;
+
+    }
+
+    .addsalebtn {
+        padding-right: 13%;
+    }
+}
+
+/*@media (min-width: 768px) {*/
+/*.title, .input-center, .content, .btn-center, .list-choice, .example, .selectAll {*/
+/*margin: 5px auto 5px 130px;*/
+/*!*margin: 0 auto;*!*/
+/*}*/
+/*}*/
+
+/*弹出窗口显示大图效果*/
+.black_overlay {
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 130%;
+    background-color: #000000;
+    z-index: 1001;
+    -moz-opacity: 0.8;
+    opacity: .80;
+    filter: alpha(opacity=80);
+}
+
+.white_content {
+    display: none;
+    position: absolute;
+    top: -1%;
+    left: 12%;
+    background-color: white;
+    z-index: 1002; /* 数字的大小指明了div的相对层，数字大的在上层 */
+    overflow: auto;
+}
+
+#checkTab {
+    table-layout: fixed;
+    border: none;
+}
+
+#checkTab thead, #checkTab tbody {
+    display: block;
+    width: 100%;
+}
+
+#checkTab tbody {
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+}
+
+#checkTab th, #checkTab td {
+    /*width: 5%;*/
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#checkTab th:nth-child(1), #checkTab td:nth-child(1),
+#checkTab th:nth-child(2), #checkTab td:nth-child(2),
+#checkTab th:nth-child(5), #checkTab td:nth-child(5),
+#checkTab th:nth-child(6), #checkTab td:nth-child(6) {
+    width: 4%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#checkTab th:nth-child(3), #checkTab td:nth-child(3) {
+    width: 5%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#checkTab th:nth-child(4), #checkTab td:nth-child(4) {
+    width: 18%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#voteTab {
+    table-layout: fixed;
+    border: none;
+    min-width: 934px;
+}
+
+#voteTab thead, #voteTab tbody {
+    display: block;
+    width: 100%;
+}
+
+#voteTab tbody {
+    position: relative;
+    overflow: hidden;
+    height: 510px;
+}
+
+#voteTab thead th {
+    height: 40px;
+}
+
+#voteTab th, #voteTab td {
+    width: 5%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#voteTab .vote-th {
+    width: 25%;
+}
+
+#allResults {
+    width: 1100px;
+}
+
+/*//allVote*/
+#allVoteTab {
+    table-layout: fixed;
+    border: none;
+    min-width: 1100px;
+}
+
+#allVoteTab thead, #allVoteTab tbody {
+    display: block;
+    width: 100%;
+}
+
+#allVoteTab tbody,#addTable tbody {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+
+#allVoteTab th, #allVoteTab td {
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#allVoteTab th:nth-child(1), #allVoteTab td:nth-child(1),
+#allVoteTab th:nth-child(2), #allVoteTab td:nth-child(2) {
+    width: 150px;
+    min-width: 130px;
+}
+
+#allVoteTab th:nth-child(3), #allVoteTab td:nth-child(3),
+#allVoteTab th:nth-child(4), #allVoteTab td:nth-child(4),
+#allVoteTab th:nth-child(5), #allVoteTab td:nth-child(5) {
+    width: 277px;
+    min-width: 212px;
+
+}

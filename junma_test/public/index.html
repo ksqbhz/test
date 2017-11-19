@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>俊马知识产权</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-datetimepicker.min.css" media="screen">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/perfect-scrollbar.min.css">
+
+    <style>
+     .App_Tbody {
+        display: block;
+        width: 500px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        height: 400px;
+     }
+
+     .App_Tbody td {
+        width: 100px;
+     }
+  </style>
+</head>
+<body style="overflow: auto;width: auto">
+<div class="bg"></div>
+<nav class="nav navbar" id="NavRespone">
+    <div class="navbar-header">
+        <a href="" class="navbar-brand">
+            <img src="img/title.png"/>
+        </a>
+    </div>
+    <div class=" user  navbar-brand navbar-right">
+        <span><img src="img/u80.png" style="width: 28px;height: 25px;"/><span class="person">未登录</span></span>
+        <span class="layout btn btn-lg" style="color: black;border: 1px solid white">退出</span>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="infomation">
+        <div class="row">
+
+            <div class=" col-lg-2 col-md-3 col-sm-3 hidden-xs menu" id="panelgroup">
+                <ul class="nav nav-pills nav-stacked">
+                    <li id="SearchGuide">
+                        <div class="panel">
+                            <!-- heading -->
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a href="#" id="Search-Input">商标可注册类别查询</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="VoteGuider">
+                        <div class="panel">
+                            <!-- heading -->
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a href="#" data-toggle="collapse" data-target="#part2" id="VoteGuide"
+                                       data-parent="#panelgroup" onclick="Reverse(this)">商标名称投票　
+                                        <span id="jiantou" class="glyphicon glyphicon-chevron-up"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- 对整个body进行折叠 -->
+                            <div class="panel-collapse collapse " id="part2">
+                                <div class="panel-body">
+                                    <p><a href="#" id="statsName" onclick="statsNamefuc()">商标名称统计</a></p>
+                                    <p><a href="#" class="voteName" onclick="VoteNamefuc()">商标名称投票</a></p>
+                                    <p><a href="#" id="checkResult">投票结果查询</a></p>
+                                    <p><a href="#" id="allVoteResult" onclick="">投票者查询</a></p>
+                                </div>
+                            </div>
+                            <!-- footer -->
+                        </div>
+                    </li>
+                    <li id="ManageGuide">
+                        <div class="panel">
+                            <!-- heading -->
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a href="#" id="transaction"
+                                       onclick="toDeal()">商标交易管理</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="SalemanGudie">
+                        <div class="panel">
+                            <!-- heading -->
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a href="#" id="saleMan" onclick="SaleMessage()">业务员管理</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="AppGuide">
+                        <div class="panel">
+                            <!-- heading -->
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a href="#" id="app" onclick="appUsers()">APP用户管理</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="MessageGuide">
+                        <div class="panel">
+                            <!-- heading -->
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a href="#" id="sendMessage" onclick="pushInformation()">消息推送</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li><a href=" " id="allVoteResult">可投票与已投票记录</a></li>-->
+                </ul>
+
+            </div>
+            <div class="right-panel  col-md-9 col-lg-9  col-md-9 col-sm-9">
+                <div class="showHide">
+                    <div>
+                        <div class="input-group col-md-5 col-sm-6 col-xs-5 col-lg-4 input-center">
+                            <input class="form-control" placeholder="输入拼音，中间以空格隔开" aria-describedby="basic-addon2"
+                                   id='get-input'>
+                            <span class="input-group-addon btn btn-info" id="basic-addon2">转换</span>
+                        </div>
+                        <div class="example">示例：meng xiang</div>
+                    </div>
+                    <div class="list-choice"></div>
+                    <!--显示组合-->
+                    <div class="content"></div>
+
+                    <div class="checkbox selectAll">
+                        <input type="checkbox" id='gobalAll-input' onclick="gobalAll(this)"><span>全选/反选</span>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 btn-center">
+                        <button class="btn btn-info btn-lg btn-block" id='nextStep'>下一步</button>
+                    </div>
+                </div>
+
+                <div id="query-result">
+                    <!--返回按钮-->
+                    <div class="col-md-3 col-sm-3 col-lg-3 goback">
+                        <button class="btn btn-info btn-lg btn-block" onclick='goback()'>返回</button>
+                    </div>
+                    <!--  查询结果-->
+                    <div class="result-list"></div>
+
+                </div>
+
+                <!--商标名称统计-->
+                <div id="stats">
+                    <h4 class="col-lg-3 col-md-3 col-sm-3 col-xs-3">商标类别</h4>
+                    <h4 class="col-lg-3 col-md-3 col-sm-3 col-xs-3">商标名称</h4>
+                    <h4 class="col-lg-3 col-md-3 col-sm-3 col-xs-3">注释</h4>
+                    <div class="stat"></div>
+                    <button class="btn btn-info" style="width: 100px;
+                                                             margin-left: 5%;
+                                                             margin-top: 20px;"
+                            onclick="KeepVoteName(this)">保存
+                    </button>
+                    <button class="btn btn-success" style="width: 100px;
+                                                             margin-left: 5%;
+                                                             margin-top: 20px;"
+                            onclick="SumbitVoteName(this)">提交
+                    </button>
+
+                </div>
+                <!--商标名称投票-->
+                <div id="votes">
+                    <div class="vote"></div>
+                </div>
+                <!--投票结果查询-->
+                <div id="checks">
+                    <div class="check"></div>
+                </div>
+
+                <!--商标交易信息主界面-->
+                <div id="manages">
+                    <div class="manage"></div>
+                    <div id="PageManage" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                    <div></div>
+                </div>
+                <!--添加商标交易信息-->
+                <div id="trans">
+                    <h2>添加商标交易信息</h2>
+                    <div class="deal"></div>
+                </div>
+
+                <div id="edits">
+                    <h2>修改商标交易信息</h2>
+                    <div class="edit"></div>
+                </div>
+
+                <!--查看业务员信息-->
+                <div id="checkSalemanMessage">
+                    <div class="checkSaleman"></div>
+                    <div id="PageCheckSaleman" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                </div>
+                <!--添加业务员信息-->
+                <div id="addSalemanMessage">
+                    <div class="addSaleman"></div>
+                </div>
+                <!--修改业务员信息-->
+                <div id="updateSalemanMessage">
+                    <div class="updateSaleman"></div>
+                </div>
+
+                <!--查看App用户信息-->
+                <div id="checkAppUsers">
+                    <div class="checkAppUser"></div>
+                    <div id="PageCheckAppUser" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                </div>
+                <!--添加App用户信息-->
+                <div id="addAppUsers">
+                    <div class="addAppUser"></div>
+                </div>
+                <!--修改App用户信息-->
+                <div id="editAppUsers">
+                    <div class="editAppUser"></div>
+                </div>
+
+                <!--消息推送-->
+                <div id="Information">
+                    <div class="sendInformation"></div>
+                </div>
+
+                <!--投票记录-->
+                <div id="allResults">
+                    <div class="allResult"></div>
+                </div>
+                <!--分页-->
+                <div class="pageSet text-center">
+                    <a class="btn-link" id="firstPage">首页</a>
+                    <a class="btn-link" id="prevPage">上一页</a>
+                    <span class="curPage"></span>
+                    <span class="allPage"></span>
+                    <span class="allRec"></span>
+                    <a class="btn-link" id="nextPage">下一页</a>
+                    <a class="btn-link" id="lastPage">尾页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="company" class="container ">
+    由广州优易科技有限公司提供技术支持
+</footer>
+<div class="text-center">
+    <a href="http://www.miibeian.gov.cn">粤ICP备17103459号-1</a>
+</div>
+<div id="fade" class="black_overlay" onClick="closeWindow()"></div>
+    <script id="list-choice" type="text/x-dot-template">
+        <!--查询的第一个字-->
+        <div class='list-choice-container'>
+            <div>
+                <input type='checkbox' onclick='selectHead(this)'><b><span>{{= it.inputValArr[0]}}:</span></b>
+            </div>
+            <ul>
+                {{~it.headArr:value:index}}
+                <li>
+                    <div class='checkbox listChoice'>
+                        <input type='checkbox' class='headSel' onclick='headTailAll(this)'><span>{{= value}}</span>
+                    </div>
+                </li>
+                {{~}}
+            </ul>
+        </div>
+
+        <!--查询的第二个字-->
+        <div class='list-choice-container'>
+            <div>
+                <input type='checkbox' onclick='selectTail(this)'><b><span>{{= it.inputValArr[1]}}:</span></b>
+            </div>
+            <ul>
+                {{~ it.tailArr:value:index}}
+                <li>
+                    <div class='checkbox listChoice'>
+                        <input type='checkbox' class='tailSel' onclick='headTailAll(this)'><span>{{= value}}</span>
+                    </div>
+                </li>
+                {{~}}
+            </ul>
+        </div>
+    </script>
+    <!--两个字的组合-->
+    <script id="content" type="text/x-dot-template">
+        <ul>
+            {{~it.headArr:headVal:index}}
+            <li>
+                <div class='checkbox divHead'>
+                    <input type='checkbox' onclick='selectAll(this)' onclick='setGobalAll(this)'>
+                    <b>{{= headVal }}</b>
+                </div>
+                {{~it.tailArr:tailVal}}
+                <div class='checkbox divLine'>
+                    <input type='checkbox' class={{= 'class-' + index }} onclick='setSelectAll(this)'>
+                    <span>{{= headVal + tailVal }}</span>
+                </div>
+                {{~}}
+            </li>
+            {{~}}
+        </ul>
+    </script>
+
+    <script id="result-list" type="text/x-dot-template">
+        <table class="table table-hover table-striped" id="tab">
+            <thead>
+            <tr class="info">
+                <th>序号</th>
+                <th>商标名</th>
+                <th>可注册类</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{~it.array:obj:index}}
+            <!--设置颜色相间-->
+            <!--? if  ?? else if-->
+            {{? index%2 === 0 }}
+            <tr class="success con">
+                {{??}}
+            <tr class="danger con">
+                {{?}}
+                <td>{{=index+1}}</td>
+                <td>{{= obj.keyword }}</td>
+                <td>
+                    {{~obj.resResult:val}}
+                    <span>{{= val }}</span>
+                    {{~}}
+                </td>
+            </tr>
+            {{~}}
+            </tbody>
+        </table>
+
+    </script>
+    <!--//商标名称统计-->
+    <script id="stat" type="text/x-dot-template">
+        <form>
+            <table class="table">
+                {{ for(var i=0, len=it.len; i
+                <len ; i++) { }}
+                <tr>
+                    <td>{{=i+1}}</td>
+                    {{? it.resArr.length>i }}
+                    <td class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"><input type="text"
+                                                                            class="col-lg-8 col-sm-10 col-sm-10 col-xs-10 StatType"
+                                                                            value={{=it.resArr[i].statType}}
+                                                                            oninput="NumWatch(this)" size="2"
+                                                                            maxlength="2">
+                    </td>
+                    {{??}}
+                    <td class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"><input type="text"
+                                                                            class="col-lg-8 col-sm-10 col-sm-10 col-xs-10 StatType"
+                                                                            oninput="NumWatch(this)" size="2"
+                                                                            maxlength="2">
+                    </td>
+                    {{?}}
+                    {{? it.resArr.length>i }}
+                    <td class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"><input type="text"
+                                                                            class="col-lg-8 col-sm-10 col-sm-10 col-xs-10 StatName"
+                                                                            value={{=it.resArr[i].statName}}>
+                    </td>
+                    {{??}}
+                    <td class=" col-lg-3 col-md-3 col-sm-3 col-xs-3"><input type="text"
+                                                                            class="col-lg-8 col-sm-10 col-sm-10 col-xs-10 StatName">
+                    </td>
+                    {{?}}
+                    {{? it.resArr.length>i }}
+                    <td class=" col-lg-6 col-md-6 col-sm-6 col-xs-6"><input type="text"
+                                                                            class="col-lg-7 col-sm-10 col-sm-10 col-xs-10 StatDesc"
+                                                                            value={{=it.resArr[i].statDesc}}>
+                    </td>
+                    {{??}}
+                    <td class=" col-lg-6 col-md-6 col-sm-6 col-xs-6"><input type="text"
+                                                                            class="col-lg-7 col-sm-10 col-sm-10 col-xs-10 StatDesc">
+                    </td>
+                    {{?}}
+                </tr>
+                {{ } }}
+            </table>
+        </form>
+    </script>
+
+    <!--商标名称投票-->
+    <script id="vote" type="text/x-dot-template">
+        <table class="table table-hover table-bordered table-striped" id="voteTab">
+            <thead>
+            <tr class="info">
+                <th>序号</th>
+                <th>
+                    <input type="checkbox" id="SelectVoteAll" onclick="SelectVoteAll(this)"
+                           style="zoom: 150%;-moz-transform:scale(1.5);-moz-transform-origin:top left">
+                </th>
+                <th onclick="OrderByType()" style="cursor: pointer">商标类别
+                    <span id="Typejiantou" class="glyphicon glyphicon-chevron-down"></span>
+                </th>
+                <th>商标名称</th>
+                <th class="vote-th">注释</th>
+            </tr>
+            </thead>
+            <tbody class="voteTr-tbody">
+
+            {{~it.result :value:index }}
+            {{?index%2==0}}
+            <tr class="voteTr">
+                {{??}}
+            <tr class="success  voteTr">
+
+                {{?}}
+                <td class="col-lg-1">{{=index+1}}</td>
+                {{?value.selected == 0}}
+                <td><input class="voteTrinput" type="checkbox" onclick="SelectVote()"
+                           style="zoom: 150%;-moz-transform:scale(1.5);-moz-transform-origin:top left"></td>
+                {{??value.selected == 1}}
+                <td><input class="voteTrinput" type="checkbox" checked onclick="SelectVote()"
+                           style="zoom: 150%;-moz-transform:scale(1.5);-moz-transform-origin:top left"></td>
+                {{?}}
+                <td class="col-lg-2 voteTrType">第{{=value.statType}}类</td>
+                <td class="col-lg-3 voteTrName">{{=value.statName}}</td>
+                <td class="col-lg-5 voteTrDesc vote-th">{{=value.statDesc}}</td>
+                <td class="col-lg-5 voteTr_id" style="display: none">{{=value._id}}</td>
+            </tr>
+            {{~}}
+            </tbody>
+        </table>
+        <div>
+            <span>已选择</span>
+            <span id="ChoVoteNum">0</span>
+            <span>条</span>
+            <span>/共</span>
+            <span id="TotalCho">{{=it.result.length}}</span>
+            <span>条记录</span>
+        </div>
+        <div class="col-md-2 col-sm-3 col-lg-2 col-xs-3" style="padding-left: 0px;">
+            <button id="KeepVoteBtn" class="btn btn-info btn-lg btn-block " onclick='KeepVoteResult(this)'>保存</button>
+        </div>
+        <div class="col-md-2 col-sm-3 col-lg-2 col-xs-3">
+            <button id="SubmitVoteBtn" class="btn btn-success btn-lg btn-block" onclick='SubmitVoteResult(this)'>提交</button>
+        </div>
+    </script>
+
+    <!--投票结果查询-->
+    <script id="check" type="text/x-dot-template">
+        <div>
+            <div id="voteRes" style="float: left;">
+                <div><h4>投票结果：</h4></div>
+            </div>
+            <div style="float: right">
+                {{? it.Right == true}}
+                <button type="button" class="btn btn-default " data-toggle="modal" data-target="#cleanModal">
+                    清除数据
+                </button>
+                {{?}}
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="cleanModal" tabindex="-1" role="dialog" aria-labelledby="cleanModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="cleanModalLabel">
+                                    确定清除数据吗？
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                </button>
+                                <button type="button" class="btn btn-primary" id="cleanData" onclick="clearData()">清除数据
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                {{? it.Right == true}}
+                <button class="btn btn-default" onclick="method5('checkTab')" id="exportEX">导出Excel文件</button>
+                {{?}}
+            </div>
+        </div>
+        <table class="table table-hover  text-center table-bordered table-striped" id="checkTab">
+            <thead>
+            <tr class="info">
+                <th class="text-center">序号</th>
+                <th class="text-center">商标类别</th>
+                <th class="text-center">商标名称</th>
+                <th class="text-center">注释</th>
+                <th class="text-center" onclick="Reverse2(this)" id="VoteCountTh">得票数
+                    {{? it.Flag !==2 }}
+                    <span id="jiantou2" class="glyphicon glyphicon-chevron-down"></span>
+                    {{??}}
+                    <span id="jiantou2" class="glyphicon glyphicon-chevron-up"></span>
+                    {{?}}
+                </th>
+                {{? it.Right == true}}
+                <th class="text-center">提交者</th>
+                {{?}}
+            </tr>
+            </thead>
+            <tbody class="tab-body">
+            {{~it.resArr:value:index}}
+            {{? index%2 == 0}}
+            <tr class="checkTabTr">
+                {{??}}
+            <tr class="bg-success checkTabTr">
+                {{?}}
+                <td>{{=index+1}}</td>
+                <td>{{=value.statType}}</td>
+                <td>{{=value.statName}}</td>
+                <td>{{=value.statDesc}}</td>
+                <td class="countNum">{{=value.count}}</td>
+                {{? it.Right == true}}
+                <td>{{=value.createID}}</td>
+                {{?}}
+            </tr>
+            {{~}}
+            </tbody>
+        </table>
+
+    </script>
+
+
+    <!--添加商标交易信息-->
+    <script id="deal" type="text/x-dot-template">
+        <form enctype="multipart/form-data" method="post">
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                <label>状态:　　</label>
+                <select class="dealBuff DealMar">
+                    <option class="options">请选择状态</option>
+                    <option class="options">注册中</option>
+                    <option class="options">销售中</option>
+                    <option class="options">已销售</option>
+                </select>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>商标名称:</label>
+                <input class="dealName DealMar">
+                <span style="color: red;">*</span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>类别:　　</label>
+                <select class="dealType DealMar">
+                    <option class="options">请选择类别</option>
+                    <option class="options">第1类-化学原料</option>
+                    <option class="options">第2类-颜料油漆</option>
+                    <option class="options">第3类-日化用品</option>
+                    <option class="options">第4类-燃料油脂</option>
+                    <option class="options">第5类-医药</option>
+                    <option class="options">第6类-金属材料</option>
+                    <option class="options">第7类-机械设备</option>
+                    <option class="options">第8类-手工器械</option>
+                    <option class="options">第9类-科学仪器</option>
+                    <option class="options">第10类-医疗器械</option>
+                    <option class="options">第11类-灯具空调</option>
+                    <option class="options">第12类-运输工具</option>
+                    <option class="options">第13类-军火烟火</option>
+                    <option class="options">第14类-珠宝钟表</option>
+                    <option class="options">第15类-乐器</option>
+                    <option class="options">第16类-办公用品</option>
+                    <option class="options">第17类-橡胶制品</option>
+                    <option class="options">第18类-皮革皮具</option>
+                    <option class="options">第19类-建筑材料</option>
+                    <option class="options">第20类-家具</option>
+                    <option class="options">第21类-厨房洁具</option>
+                    <option class="options">第22类-绳网袋篷</option>
+                    <option class="options">第23类-纱线丝</option>
+                    <option class="options">第24类-布料床单</option>
+                    <option class="options">第25类-服装鞋帽</option>
+                    <option class="options">第26类-钮扣拉链</option>
+                    <option class="options">第27类-地毯席垫</option>
+                    <option class="options">第28类-健身器材</option>
+                    <option class="options">第29类-食品</option>
+                    <option class="options">第30类-方便食品</option>
+                    <option class="options">第31类-饲料种籽</option>
+                    <option class="options">第32类-啤酒饮料</option>
+                    <option class="options">第33类-酒</option>
+                    <option class="options">第34类-烟草烟具</option>
+                    <option class="options">第35类-广告销售</option>
+                    <option class="options">第36类-金融物管</option>
+                    <option class="options">第37类-建筑修理</option>
+                    <option class="options">第38类-通讯服务</option>
+                    <option class="options">第39类-运输贮藏</option>
+                    <option class="options">第40类-材料加工</option>
+                    <option class="options">第41类-教育娱乐</option>
+                    <option class="options">第42类-网站服务</option>
+                    <option class="options">第43类-餐饮住宿</option>
+                    <option class="options">第44类-医疗园艺</option>
+                    <option class="options">第45类-社会服务</option>
+                </select>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>申请日期:</label>
+                <input class="applyTime DealMar setdate  date"
+                       size="16" type="text" value="" readonly
+                >
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>注册号:　</label>
+                <input class="dealMark DealMar">
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>注册日期:</label>
+                <input class="signDate DealMar setdate date"
+                       size="16" type="text" value="" readonly>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>交易价格: </label>
+                <input class="Price DealMar">
+                元
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>销售价格: </label>
+                <input class="salePrice DealMar">
+                元
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>销售日期: </label>
+                <input class="saledate DealMar setdate date"
+                       size="16" type="text" value="" readonly>
+
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>分红金额: </label>
+                <input class="money DealMar">
+                元
+            </div>
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label class="pull-left" style="vertical-align: top">注册产品:</label>
+                <textarea rows="7" class=" production Tarea DealMar"
+                          placeholder="请输入您的留言"></textarea>
+            </div>
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label class="pull-left">商标图样:</label>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <input type="file" id="logobtn_file" style="display: inline-block">
+                    <span class="glyphicon glyphicon-remove"
+                          style="color: red; cursor: pointer"
+                          onclick="removeIMGLogoInp1(this)"></span>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label class="pull-left">合同与证书:</label>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 gurantees" style="    padding-left: 0px;">
+                    <div class="removeGuranteeInp">
+                        <input type="file" class="gurbtn_file" style="display: inline-block">
+                        <span class="glyphicon glyphicon-remove"
+                              style="color: red; cursor: pointer"
+                              onclick="removeInp(this)"></span>
+                    </div>
+                </div>
+                <input class="AddGurMar btn btn-default  col-lg-1 col-md-2 col-sm-2 col-xs-2"
+                       style="margin-top: 2%; width: 85px;" value="继续添加"
+                       onclick="addGurantee()">
+            </div>
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="DealAPPUser">
+                <label class="SelectedUsers pull-left">
+                    APP用户:
+                </label>
+                <button type="button"
+                        class="appUser btn btn-default "
+                        style=" margin-left: 15px;"
+                        data-toggle="modal" data-target="#myModal3"
+                >选择
+                </button>
+                <i style="color: red;">*</i>
+                <span class="AppUserName"></span>
+                <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel3">
+                                    APP用户
+                                </h4>
+                            </div>
+                            <div class="modal-body ">
+                                <table class="table table-bordered  table-hover selectAppUser " id="addTable" style="border: none">
+                                    <tbody class="App_Tbody">
+				    <tr>
+                                     <th><input type="checkbox" class="SelectAPPAll" onclick="SelectAPPAll(this)">
+                                     </th>
+                                     <th>序号</th>
+                                     <th>APP用户名</th>
+                                     <th>登录密码</th>
+                                     <th>手机号码</th>
+                                    </tr>
+                                    {{~it.UserArr:value:index}}
+                                    <tr class="APPTr">
+                                        <td>
+                                            <label>
+                                                <input type="checkbox" name="" onclick="SelectAPP()">
+                                            </label>
+                                        </td>
+                                        <td>{{=index+1}}</td>
+                                        <td>{{=value.AppUserName}}</td>
+                                        <td>{{=value.pwd}}</td>
+                                        <td>{{=value.telNumber}}</td>
+                                        <td style="display: none;">{{=value.AppUserID}}</td>
+                                    </tr>
+                                    {{~}}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                        onclick="SelectsAppUser(this)">
+                                    确定
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal"
+                    style="width: 100px;margin-left: 51%;">
+                确定
+            </button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                确定添加？
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" id="SubmitAdd" onclick="AddDeal()">
+                                提交添加
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <input class="btn btn-danger" style="width: 100px;margin-left: 6%;" value="取消" onclick="toDeal()">
+        </form>
+    </script>
+
+    <!--修改商标交易信息-->
+    <script id="edit" type="text/x-dot-template">
+        <form enctype="multipart/form-data" method="post">
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>状态:　　</label>
+                <select id="editBuff" class="DealMar">
+                    <option class="options">请选择状态</option>
+                    <option class="options">注册中</option>
+                    <option class="options">销售中</option>
+                    <option class="options">已销售</option>
+                </select>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>商标名称:</label>
+                <input class="editName DealMar" value="{{=it.name}}">
+                <span style="color: red;">*</span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>类别:　　</label>
+                <select id="editType" class="DealMar">
+                    <option class="options">请选择类别</option>
+                    <option class="options">第1类-化学原料</option>
+                    <option class="options">第2类-颜料油漆</option>
+                    <option class="options">第3类-日化用品</option>
+                    <option class="options">第4类-燃料油脂</option>
+                    <option class="options">第5类-医药</option>
+                    <option class="options">第6类-金属材料</option>
+                    <option class="options">第7类-机械设备</option>
+                    <option class="options">第8类-手工器械</option>
+                    <option class="options">第9类-科学仪器</option>
+                    <option class="options">第10类-医疗器械</option>
+                    <option class="options">第11类-灯具空调</option>
+                    <option class="options">第12类-运输工具</option>
+                    <option class="options">第13类-军火烟火</option>
+                    <option class="options">第14类-珠宝钟表</option>
+                    <option class="options">第15类-乐器</option>
+                    <option class="options">第16类-办公用品</option>
+                    <option class="options">第17类-橡胶制品</option>
+                    <option class="options">第18类-皮革皮具</option>
+                    <option class="options">第19类-建筑材料</option>
+                    <option class="options">第20类-家具</option>
+                    <option class="options">第21类-厨房洁具</option>
+                    <option class="options">第22类-绳网袋篷</option>
+                    <option class="options">第23类-纱线丝</option>
+                    <option class="options">第24类-布料床单</option>
+                    <option class="options">第25类-服装鞋帽</option>
+                    <option class="options">第26类-钮扣拉链</option>
+                    <option class="options">第27类-地毯席垫</option>
+                    <option class="options">第28类-健身器材</option>
+                    <option class="options">第29类-食品</option>
+                    <option class="options">第30类-方便食品</option>
+                    <option class="options">第31类-饲料种籽</option>
+                    <option class="options">第32类-啤酒饮料</option>
+                    <option class="options">第33类-酒</option>
+                    <option class="options">第34类-烟草烟具</option>
+                    <option class="options">第35类-广告销售</option>
+                    <option class="options">第36类-金融物管</option>
+                    <option class="options">第37类-建筑修理</option>
+                    <option class="options">第38类-通讯服务</option>
+                    <option class="options">第39类-运输贮藏</option>
+                    <option class="options">第40类-材料加工</option>
+                    <option class="options">第41类-教育娱乐</option>
+                    <option class="options">第42类-网站服务</option>
+                    <option class="options">第43类-餐饮住宿</option>
+                    <option class="options">第44类-医疗园艺</option>
+                    <option class="options">第45类-社会服务</option>
+                </select>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>申请日期:</label>
+                <input class="editapplyTime DealMar setdate date"
+                       value="{{=it.applytime}}"
+                       size="16" type="text"
+                >
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>注册号:　</label>
+                <input class="editMark DealMar " value="{{=it.mark}}">
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>注册日期:</label>
+                <input class="editsignDate DealMar setdate date" value="{{=it.signdate}}"
+                       size="16" type="text">
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>
+                    交易价格:
+                </label>
+                <input class="editPrice DealMar" value="{{=it.price}}">
+                元
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>
+                    销售价格: </label>
+                <input class="editsalePrice DealMar" value="{{=it.saleprice}}">
+                元
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>销售日期: </label>
+                <input class="editsaledate DealMar setdate date" value="{{=it.saledate}}"
+                       size="16" type="text"
+                >
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <label>
+                    分红金额: </label>
+                <input class="editmoney DealMar" value="{{=it.money}}">
+                元
+            </div>
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label class="pull-left" style="vertical-align: top">注册产品:</label>
+                <textarea class="Tarea DealMar editproduction" rows="7" placeholder="请输入您的产品信息"
+                >{{=it.production}}</textarea>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="pull-left">商标图样:</label>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    {{?it.imglogo!=="#"}}
+                    <div class="imglogo">
+                        <input type="file" id='editimglogo'
+                               style="display:none" onchange="editInpIMG(this)">
+                        <img onclick="clickInp(this)" src='{{=it.imglogo}}' width="100px" height="100px">
+                        <span class="glyphicon glyphicon-remove"
+                              style="z-index: 2;vertical-align:bottom;color: red;cursor: pointer;"
+                              onclick="removeIMGLogoFile(this)"></span>
+                    </div>
+                    {{??}}
+                    <input type="file" class="gurbtn_file" id='editimglogo' style="display: inline-block">
+                    <span class="glyphicon glyphicon-remove"
+                          style="z-index: 2;vertical-align:bottom;color: red;cursor: pointer;"
+                          onclick="removeIMGLogoInp2(this)"></span>
+                    {{?}}
+                </div>
+            </div>
+
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label class="pull-left">合同与证书:</label>
+
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 gurantees clearfix" style="    padding-left: 0px;">
+                    {{?it.gurantee.length>0}}
+                    {{~it.gurantee:value:index}}
+                    <div class="editGurantees col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <input type="file" class="editgurantee" id={{=value.split("/")[4].split('.')[0]}}
+                               style="display:none" onchange="editInpIMG(this)">
+                        <img onclick="clickInp(this)" src={{=value}} width="100px" height="100px">
+                        <span class="glyphicon glyphicon-remove"
+                              style="z-index: 2;vertical-align:bottom;color: red;cursor: pointer;"
+                              onclick="removeFile(this)"></span>
+                    </div>
+                    {{~}}
+                    {{??}}
+                    <div class="removeGuranteeInp">
+                        <input type="file" class="gurbtn_file editgurantee" style="display: inline-block">
+                        <span class="glyphicon glyphicon-remove"
+                              style="z-index: 2;vertical-align:bottom;color: red;cursor: pointer;"
+                              onclick="removeInp(this)"></span>
+                    </div>
+                    {{?}}
+
+                </div>
+                <input class="AddGurMar btn btn-default col-lg-1 col-md-2 col-sm-2 col-xs-2"
+                       style="margin-top: 2%; width: 85px;" value="继续添加"
+                       onclick="addGurantee()">
+            </div>
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="updateDealAPPUsers">
+                <label class="SelectedUsers pull-left">
+                    APP用户:
+                </label>
+                <button type="button"
+                        class="appUser btn btn-default "
+                        style=" margin-left: 15px;"
+                        data-toggle="modal" data-target="#myModal4"
+                >选择
+                </button>
+                <i style="color: red;">*</i>
+                <span class="AppUserName"><span>{{=it.appuser}}</span></span>
+                <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel4">
+                                    APP用户
+                                </h4>
+                            </div>
+                            <div class="modal-body ">
+                                <table class="table table table-bordered  table-hover selectAppUser " id="editTable" style="border: none">
+                                    <tbody class="App_Tbody">
+				    <tr>
+                                     <th><input type="checkbox" class="SelectAPPAll" onclick="SelectAPPAll(this)">
+                                     </th>
+                                     <th>序号</th>
+                                     <th>APP用户名</th>
+                                     <th>登录密码</th>
+                                     <th>手机号码</th>
+                                    </tr>
+                                    {{~it.UserArr:value:index}}
+                                    <tr class="APPTr">
+                                        <td>
+                                            <label>
+                                                <input type="checkbox" name="" onclick="SelectAPP()">
+                                            </label>
+                                        </td>
+                                        <td>{{=index+1}}</td>
+                                        <td>{{=value.AppUserName}}</td>
+                                        <td>{{=value.pwd}}</td>
+                                        <td>{{=value.telNumber}}</td>
+                                        <td style="display: none;">{{=value.AppUserID}}</td>
+                                    </tr>
+                                    {{~}}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                        onclick="SelectsAppUser(this)">
+                                    提交
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#myModal2"
+                    style="width: 100px;margin-left: 15%;">
+                确定
+            </button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2">
+                                确定修改？
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="EditSubmit()">
+                                提交修改
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <input class="btn btn-danger" style="width: 100px;margin-left: 6%;" value="取消" onclick="toDeal()">
+        </form>
+    </script>
+
+    <!--商标交易信息主界面-->
+    <script id="manage" type="text/x-dot-template">
+        <form role="form">
+            <div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3 " style="padding-left: 0px;">
+                <select class="form-control" id="checkBuff">
+                    <option class="options">请选择状态</option>
+                    <option class="options">注册中</option>
+                    <option class="options">销售中</option>
+                    <option class="options">已销售</option>
+                </select>
+            </div>
+            <div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-3 " style="padding-left: 0px">
+                <select class="form-control" id="checkType">
+                    <option class="options">请选择类别</option>
+                    <option class="options">第1类-化学原料</option>
+                    <option class="options">第2类-颜料油漆</option>
+                    <option class="options">第3类-日化用品</option>
+                    <option class="options">第4类-燃料油脂</option>
+                    <option class="options">第5类-医药</option>
+                    <option class="options">第6类-金属材料</option>
+                    <option class="options">第7类-机械设备</option>
+                    <option class="options">第8类-手工器械</option>
+                    <option class="options">第9类-科学仪器</option>
+                    <option class="options">第10类-医疗器械</option>
+                    <option class="options">第11类-灯具空调</option>
+                    <option class="options">第12类-运输工具</option>
+                    <option class="options">第13类-军火烟火</option>
+                    <option class="options">第14类-珠宝钟表</option>
+                    <option class="options">第15类-乐器</option>
+                    <option class="options">第16类-办公用品</option>
+                    <option class="options">第17类-橡胶制品</option>
+                    <option class="options">第18类-皮革皮具</option>
+                    <option class="options">第19类-建筑材料</option>
+                    <option class="options">第20类-家具</option>
+                    <option class="options">第21类-厨房洁具</option>
+                    <option class="options">第22类-绳网袋篷</option>
+                    <option class="options">第23类-纱线丝</option>
+                    <option class="options">第24类-布料床单</option>
+                    <option class="options">第25类-服装鞋帽</option>
+                    <option class="options">第26类-钮扣拉链</option>
+                    <option class="options">第27类-地毯席垫</option>
+                    <option class="options">第28类-健身器材</option>
+                    <option class="options">第29类-食品</option>
+                    <option class="options">第30类-方便食品</option>
+                    <option class="options">第31类-饲料种籽</option>
+                    <option class="options">第32类-啤酒饮料</option>
+                    <option class="options">第33类-酒</option>
+                    <option class="options">第34类-烟草烟具</option>
+                    <option class="options">第35类-广告销售</option>
+                    <option class="options">第36类-金融物管</option>
+                    <option class="options">第37类-建筑修理</option>
+                    <option class="options">第38类-通讯服务</option>
+                    <option class="options">第39类-运输贮藏</option>
+                    <option class="options">第40类-材料加工</option>
+                    <option class="options">第41类-教育娱乐</option>
+                    <option class="options">第42类-网站服务</option>
+                    <option class="options">第43类-餐饮住宿</option>
+                    <option class="options">第44类-医疗园艺</option>
+                    <option class="options">第45类-社会服务</option>
+                </select>
+            </div>
+            <div class="input-group col-lg-3 col-md-4 col-sm-4  col-xs-4 form-group">
+                <input class="form-control" type="text" placeholder="请输入商标名称" id="NameSearch">
+                <span class="input-group-addon btn btn-info " onclick="AccodingNameSearch()">查询</span>
+            </div>
+        </form>
+        <div class="button-ground" style="  margin-bottom: 10px;height: 35px;">
+
+            <button class="btn btn-default col-lg-1 col-md-2 col-sm-2  col-xs-2" onclick="toAdd()"
+                    style="margin-right: 10px">添加
+            </button>
+            <button class="btn btn-default col-lg-1 col-md-2 col-sm-2  col-xs-2" onclick="toEdit()"
+                    style="margin-right: 10px">修改
+            </button>
+            <button class="btn btn-default col-lg-1 col-md-2 col-sm-2  col-xs-2" data-toggle="modal"
+                    data-target="#DelModal" style="margin-right: 10px">删除
+            </button>
+            <div class="modal fade" id="DelModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="delModalLabel">
+                                删除交易信息
+                            </h4>
+                        </div>
+                        <div class="modal-body" id="DelMessage">
+                            确定要删除吗？？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="toDelete()">
+                                提交删除
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+        <table class="table table-hover table-bordered" id="manageTab"
+               style="">
+            <thead>
+            <tr class="info">
+                <th>
+                    <label>
+                        <input type="checkbox" name="" onclick="SelectManageAll(this)" id="SelectManageAll">
+                    </label>
+                </th>
+                <th>序号</th>
+                <th>商标图样</th>
+                <th>商标名称</th>
+                <th>类别</th>
+                <th>申请日期</th>
+                <th>注册号</th>
+                <th>注册产品</th>
+                <th>注册日期</th>
+                <th>交易价格</th>
+                <th>销售价格</th>
+                <th>合同与证书</th>
+                <th>销售日期</th>
+                <th>分红金额</th>
+                <th>状态</th>
+                <th>APP用户</th>
+            </tr>
+            </thead>
+            <tbody id="textbody">
+            {{ for(var i=0, catlen=it.abc.length; i
+            <catlen ; i++) { }}
+                    {{? i%2=== 0 }}
+            <tr class="success con manageTr">
+                {{??}}
+            <tr class="danger con manageTr">
+                {{?}}
+                <td>
+                    <label>
+                        <input type="checkbox" onclick="SelectManage()">
+                    </label>
+                </td>
+                <td>{{=i+1}}</td>
+                <!--验证是否有商标图样-->
+                {{?it.abc[i].imglogo}}
+                <td class="manage-imglogo">
+                    <div class="smallimgLogo">
+                        <a href="#" class="showimgLogo" onclick="openWindow(this)">
+                            <img src="./{{=it.abc[i].imglogo}}" alt=""
+                                 style="width: 40px;height: 40px">
+                        </a></div>
+                    <div class="white_content bigimgLogo">
+                        <img src='./{{=it.abc[i].imglogo}}'
+                             style="width: 650px;height: 550px"/>
+                    </div>
+                </td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                <td class="manage-name">{{=it.abc[i].name}}</td>
+                <!--是否有商标类别-->
+                {{?it.abc[i].type !="undefined"}}
+                <td class="manage-type">{{=it.abc[i].type}}</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                <!--是否有申请日期-->
+                {{?it.abc[i].applytime}}
+                <td class="manage-applytime">{{=it.abc[i].applytime}}</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                <!--是否有注册号-->
+                {{?it.abc[i].mark}}
+                <td class="manage-mark">{{=it.abc[i].mark}}</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                <!--是否有注册产品-->
+                {{?it.abc[i].production}}
+                <td class="manage-production">{{=it.abc[i].production}}</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                <!--是否有注册日期-->
+                {{?it.abc[i].signdate}}
+                <td class="manage-signdate">{{=it.abc[i].signdate}}</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                <!--是否有交易价格-->
+                {{?it.abc[i].price}}
+                <td class="manage-price">{{=it.abc[i].price}}元</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                {{?it.abc[i].saleprice}}
+                <td class="manage-saleprice">{{=it.abc[i].saleprice}}元</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                <!--是否有合同证书图片-->
+                {{?it.abc[i].gurantee}}
+                <td class="manage-gurantee">
+                    {{ for(var j=0, goodslen=it.abc[i].gurantee.length; j
+                    <goodslen ;j++) { }}
+                    <div class="smallGuranteeIMG" style="display: inline-block;">
+                        <a href="#" class="showGuranteeIMG" onclick="openWindow(this)">
+                            <img src="./{{=it.abc[i].gurantee[j]}}" alt=""
+                                 style="width: 40px;height: 40px">
+                        </a></div>
+                    <div class="white_content bigGuranteeIMG">
+                        <img src='./{{=it.abc[i].gurantee[j]}}'
+                             style="width: 650px;height: 550px"/>
+                    </div>
+                    {{ } }}
+                </td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                <!--是否有销售日期-->
+                {{?it.abc[i].saledate}}
+                <td class="manage-saledate">{{=it.abc[i].saledate}}</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                {{?it.abc[i].money}}
+                <td class="manage-money">{{=it.abc[i].money}}元</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                {{? it.abc[i].buff == 0 }}
+                <td class="manage-buff">/</td>
+                {{?? it.abc[i].buff == 1}}
+                <td class="manage-buff">注册中</td>
+                {{?? it.abc[i].buff == 2}}
+                <td class="manage-buff">销售中</td>
+                {{?? it.abc[i].buff == 3}}
+                <td class="manage-buff">已销售</td>
+                {{?}}
+                <!--是否有APP用户-->
+                {{?it.abc[i].appuser}}
+                <td class="manage-appuser">{{=it.abc[i].appuser}}</td>
+                {{??}}
+                <td>　/　</td>
+                {{?}}
+                <td style="display: none">{{=it.abc[i].tradeID}}</td>
+
+            </tr>
+            {{ } }}
+            </tbody>
+            <!--分页-->
+        </table>
+    </script>
+
+
+    <!--查看业务员信息-->
+    <script id="checkSaleman" type="text/x-dot-template">
+        <form role="form">
+            <div class="input-group col-lg-4 col-md-4 col-sm-5 col-xs-4">
+                <input id="saleName" class="form-control" type="text" placeholder="请输入业务员姓名">
+                <span class="btn btn-default  btn-block input-group-addon" onclick="SsearchSaleName()">查询</span>
+            </div>
+        </form>
+        <div class="button-ground " style=" margin: 10px auto; height: 35px;">
+
+            <button class="btn btn-default  col-lg-1 col-md-2 col-sm-2 col-xs-2" style="margin-right: 10px"
+                    onclick="AddSale()">添加
+            </button>
+
+            <button class="btn btn-default  col-lg-1 col-md-2 col-sm-2 col-xs-2" style="margin-right: 10px"
+                    onclick="EditSale()">修改
+            </button>
+
+            <button class="btn btn-default  col-lg-1 col-md-2 col-sm-2 col-xs-2" style="margin-right: 10px"
+                    onclick="DelSale()">删除
+            </button>
+
+        </div>
+        <table class="table table-hover table-bordered saleTab" id="saleTab"
+               style="text-align: center">
+            <thead>
+            <tr class="info text-center">
+                <th>
+                    <label>
+                        <input type="checkbox" name="" onclick="SelectSalemanAll(this)" id="SelectSalemanAll">
+                    </label>
+                </th>
+                <th>序号</th>
+                <th>业务员姓名</th>
+                <th>业务员QQ</th>
+                <th>业务员手机号码</th>
+                <th>商标信息二级网站</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{~it.messageArray:value:index}}
+            {{? index%2 == 0}}
+            <tr class="bg-success saleTr">
+                {{??}}
+            <tr class="bg-danger saleTr">
+                {{?}}
+                <td>
+                    <label>
+                        <input type="checkbox" name="" onclick="SelectSaleman(this)">
+                    </label>
+                </td>
+                <td>{{=index+1}}</td>
+                <td class="saleName">{{=value.saleName}}</td>
+                <td>{{=value.saleQQ}}</td>
+                <td>{{=value.saleTelNum}}</td>
+                {{?value.url}}
+                <td>{{=value.url}}</td>
+                {{??}}
+                <td>/</td>
+                {{?}}
+                <td style="display: none;">{{=value.saleID}}</td>
+            </tr>
+            {{~}}
+            </tbody>
+            <!--分页-->
+        </table>
+    </script>
+    <!--添加业务员信息-->
+    <script id="addSaleman" type="text/x-dot-template">
+        <form enctype="multipart/form-data" method="post">
+            <h3>添加业务员</h3>
+            <div class="inpMes col-lg-10">
+                <div class="inp">
+                    <label>业务员姓名:　　　<input type="text"></label>
+                </div>
+                <div class="inp">
+                    <label>业务员QQ:　　　 <input type="text" oninput="NumWatch(this)"></label>
+                </div>
+                <div class="inp">
+                    <label>业务员手机号码:　<input type="text" oninput="NumWatch(this)"></label>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#saleModal">
+                确定
+            </button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="saleModal" tabindex="-1" role="dialog" aria-labelledby="saleModalTabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="saleModalTabel">
+                                确定添加？
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="sendSaleData()">
+                                提交添加
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <input class="btn btn-danger" style="width: 100px;margin-left: 10%;" value="取消" onclick="SaleMessage()">
+        </form>
+    </script>
+    <!--修改业务员信息-->
+    <script id="updateSaleman" type="text/x-dot-template">
+        <form enctype="multipart/form-data" method="post">
+            <h3>修改业务员</h3>
+            <div class="inpMes col-lg-10">
+                <div class="inp">
+                    <label>业务员姓名:　　　<input type="text" value={{=it.saleName}}></label>
+                </div>
+                <div class="inp">
+                    <label>业务员QQ:　　　 <input type="text" oninput="NumWatch(this)" value={{=it.saleQQ}}></label>
+                </div>
+                <div class="inp">
+                    <label>业务员手机号码:　<input type="text" oninput="NumWatch(this)" value={{=it.saleTelNum}}></label>
+                </div>
+
+            </div>
+            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#EditModal">
+                确定
+            </button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalTabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="EditModalTabel">
+                                确定修改？
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="editSaleData()">
+                                提交修改
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <input class="btn btn-danger" style="width: 100px;margin-left: 10%;" value="取消" onclick="SaleMessage()">
+        </form>
+    </script>
+
+    <!--APP用户管理-->
+    <!--查看App用户信息-->
+    <script id="checkAppUser" type="text/x-dot-template">
+        <form role="form">
+            <div class="input-group col-lg-4 col-md-4 col-sm-5 col-xs-4">
+                <input id="appUser" class="form-control" type="text" placeholder="请输入APP用户名">
+                <span class="btn btn-default btn-block input-group-addon btn-info"
+                      onclick="SsearchAppUserName()">查询</span>
+            </div>
+        </form>
+        <div class="button-ground" style="    margin: 10px auto;    height: 35px;">
+            <button class="btn btn-default  col-lg-1 col-md-2 col-sm-2 col-xs-2" onclick="AddappUser()"
+                    style="margin-right: 10px">添加
+            </button>
+
+            <button class="btn btn-default  col-lg-1 col-md-2 col-sm-2 col-xs-2" onclick="EditappUser()"
+                    style="margin-right: 10px">修改
+            </button>
+
+            <button class="btn btn-default  col-lg-1 col-md-2 col-sm-2 col-xs-2" onclick="DelappUser()"
+                    style="margin-right: 10px">删除
+            </button>
+        </div>
+        <table class="table table-hover table-bordered AppUserTab" id="AppUserTab"
+               style="text-align: center">
+            <thead>
+            <tr class="info text-center">
+                <th>
+                    <label>
+                        <input type="checkbox" name="" onclick="SellectAppUserAll(this)" id="SellectAppUserAll">
+                    </label>
+                </th>
+                <th>序号</th>
+                <th>APP用户名</th>
+                <th>登录密码</th>
+                <th>手机号码</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{~it.userArray:value:index}}
+            {{? index%2 == 0}}
+            <tr class="bg-success appTr">
+                {{??}}
+            <tr class="bg-danger appTr">
+                {{?}}
+                <td>
+                    <label>
+                        <input type="checkbox" name="" onclick="SellectAppUser(this)">
+                    </label>
+                </td>
+                <td>{{=index+1}}</td>
+                <td class="searchAPPName">{{=value.AppUserName}}</td>
+                <td>{{=value.pwd}}</td>
+                <td>{{=value.telNumber}}</td>
+                <td style="display: none;">{{=value.AppUserID}}</td>
+            </tr>
+            {{~}}
+            </tbody>
+            <!--分页-->
+        </table>
+    </script>
+    <!--添加APP用户-->
+    <script id="addAppUser" type="text/x-dot-template">
+        <form enctype="multipart/form-data" method="post">
+            <h3>APP用户</h3>
+            <div class="inpMes col-lg-10">
+                <div class="inp">
+                    <label id="checkNames">
+                        APP用户名:　<input type="text" id="APPUSERNAME" onblur="checkAPPUserName()">
+                    </label>
+                </div>
+                <div class="inp">
+                    <label>登录密码:　　<input type="password"></label>
+                </div>
+                <div class="inp">
+                    <label>手机号码:　　<input type="text" oninput="NumWatch(this)"></label>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#addAppModal">
+                确定
+            </button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="addAppModal" tabindex="-1" role="dialog" aria-labelledby="AppModalTabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="AppModalTabel">
+                                确定添加？
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="sendAPPUsersData()">
+                                提交添加
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <input class="btn btn-danger" style="width: 100px;margin-left: 10%;" value="取消" onclick="appUsers()">
+        </form>
+    </script>
+    <!--修改APP用户信息-->
+    <script id="editAppUser" type="text/x-dot-template">
+        <form enctype="multipart/form-data" method="post">
+            <h3>修改APP用户</h3>
+            <div class="inpMes col-lg-10">
+                <div class="inp">
+                    <label>APP用户名:　<input type="text" value={{=it.AppUserName}}></label>
+                </div>
+                <div class="inp">
+                    <label>登录密码:　　<input type="password" value={{=it.pwd}}></label>
+                </div>
+                <div class="inp">
+                    <label>手机号码:　　<input type="text" oninput="NumWatch(this)" value={{=it.telNumber}}></label>
+                </div>
+
+            </div>
+            <button type="button" class="btn btn-success " data-toggle="modal" data-target="#EditAppModal">
+                确定
+            </button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="EditAppModal" tabindex="-1" role="dialog" aria-labelledby="EditAppTab"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="EditAppTab">
+                                确定修改？
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="editAPPUserData()">
+                                提交修改
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <input class="btn btn-danger" style="width: 100px;margin-left: 10%;" value="取消" onclick="appUsers()">
+        </form>
+    </script>
+
+    <!--消息推送模块-->
+    <script id="sendInformation" type="text/x-dot-template">
+        <h4>消息推送</h4>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;">
+            <label class="SelectedUsers pull-left">
+                APP用户:
+            </label>
+            <button type="button"
+                    class="appUser btn btn-default "
+                    style=" margin-left: 10px;"
+                    data-toggle="modal" data-target="#myModal5"
+            >选择
+            </button>
+            <span class="AppUserName"></span>
+            <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel5">
+                                APP用户
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered  table-hover selectAppUser " id="sendMesTable" style="border: none">
+                                <tbody class="App_Tbody">
+				<tr>
+                                 <th><input type="checkbox" class="SelectAPPAll" onclick="SelectAPPAll(this)"></th>
+                                 <th>序号</th>
+                                 <th>APP用户名</th>
+                                 <th>登录密码</th>
+                                 <th>手机号码</th>
+                                </tr>
+                                {{~it.UserArr:value:index}}
+                                <tr class="APPTr">
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="" onclick="SelectAPP()">
+                                        </label>
+                                    </td>
+                                    <td>{{=index+1}}</td>
+                                    <td>{{=value.AppUserName}}</td>
+                                    <td>{{=value.pwd}}</td>
+                                    <td>{{=value.telNumber}}</td>
+                                    <td style="display: none;">{{=value.AppUserID}}</td>
+                                </tr>
+                                {{~}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                    onclick="SelectsAppUser(this)">
+                                确定
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+        <div>
+            <div style="float: left;">
+                <label>　消息内容:　</label>
+            </div>
+            <div>
+            <textarea id="sendAPPmessage" style="width: 400px;height: 150px;" placeholder="请输入要推送的消息内容"
+            ></textarea>
+            </div>
+
+        </div>
+        <div style="  margin-left: 22%;">
+            <button type="button" class="btn btn-success "
+                    style="width: 100px; margin-left: 5%;" onclick="sendAppMes()">
+                提交
+            </button>
+            <button type="button" class="btn btn-danger "
+                    style="width: 100px; margin-left: 5%;" onclick="pushInformation()">
+                取消
+            </button>
+        </div>
+    </script>
+
+    <!--投票记录查询-->
+    <script id="allResult" type="text/x-dot-template">
+        <div class="input-group col-md-5 col-sm-6 col-xs-5 col-lg-4 pull-left " style="margin-bottom: 20px">
+            <input class="form-control" placeholder="请输入投票者全名或单个字" id=''>
+            <span class="input-group-addon btn btn-info" id="" onclick="SearchAllResult(this)">搜索</span>
+        </div>
+        <div class="  pull-right  ">
+            <button type="button" class="btn btn-default " data-toggle="modal" data-target="#cleanModal"
+                    onclick="method5('allVoteTab')">
+                导出EXCEL
+            </button>
+        </div>
+
+        <table class="table table-hover table-striped text-center table-bordered"
+               id="allVoteTab">
+            <thead>
+            <tr class="info">
+                <th class="text-center">序号</th>
+                <th class="text-center">姓名</th>
+                <th class="text-center">提交商标数</th>
+                <th class="text-center">可投票数</th>
+                <th class="text-center" onclick="OrderBySubmitNum()" style="cursor: pointer">
+                    已投票数
+                    {{? it.Flag !==2 }}
+                    <span id="jiantou4" class="glyphicon glyphicon-chevron-down"></span>
+                    {{??}}
+                    <span id="jiantou4" class="glyphicon glyphicon-chevron-up"></span>
+                    {{?}}
+                </th>
+            </tr>
+            </thead>
+            <tbody class="allvoteRes">
+            {{~it.result:value:index}}
+            {{?index%2 == 0}}
+            <tr class="bg-danger allvoteResTr">
+                {{??}}
+            <tr class="bg-success allvoteResTr">
+                {{?}}
+                <td>{{=index+1}}</td>
+                <td class="allvoteResTr-name">{{=value.name}}</td>
+                <td>{{=value.CreateNum}}</td>
+                <td>{{=value.BeVoteNum}}</td>
+                <td>{{=value.SubmitedNum}}</td>
+            </tr>
+            {{~}}
+            </tbody>
+        </table>
+    </script>
+</body>
+<script src="./js/head.load.min.js"></script>
+<script type="text/javascript">
+    head.load(
+        './js/jquery-1.12.4.min.js',
+        './js/doT.min.js',
+        "./js/bootstrap.min.js",
+        "./js/bootstrap-datetimepicker.min.js",
+        "./js/bootstrap-datetimepicker.zh-CN.js",
+        "./js/perfect-scrollbar.jquery.min.js",
+        "./js/bootstrap-paginator.min.js",
+        "./ManageView.js",
+        "./VoteView.js",
+        "./CodeText.js",
+        "./SalemenView.js",
+         "./SendMessageView.js",
+        "./AppUserView.js"
+    )
+</script>
+
+
+<!--<script src='./js/jquery-1.12.4.min.js'></script>-->
+<!--<script src='./js/doT.min.js'></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
+<!--<script src="newstyle.js"></script>-->
+<!--<script src="CodeText.js"></script>-->
+<!--<script src="ManageView.js"></script>-->
+<!--<script src="AppUserView.js"></script>-->
+<!--<script src="SalemenView.js"></script>-->
+<!--<script src="SendMessageView.js"></script>-->
+<!--<script src="./js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>-->
+<!--<script src="./js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>-->
+<!--<script src="js/perfect-scrollbar.jquery.min.js"></script>-->
+<!--<script src="js/bootstrap-paginator.min.js"></script>-->
+
+
+</html>

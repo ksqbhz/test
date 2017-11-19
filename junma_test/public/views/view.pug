@@ -1,0 +1,202 @@
+doctype html
+html
+    head
+        title 俊马知识产权
+        link(rel="stylesheet" href="../css/bootstrap.css")
+        link(rel="stylesheet" href="../css/pugstyle.css")
+        script( src='../js/jquery-1.12.4.min.js')
+        script( src="../js/bootstrap.min.js")
+        script( src="../js/script.js")
+    body
+        .bg
+        .titlebg
+        .container
+            nav(style="margin-bottom:0px").nav.navbar
+                .navbar-header.navbar-left
+                    img(src="../img/logo.jpg" style="padding: 24px 0px;")
+                .input-group.col-md-5.col-sm-5.col-xs-5.col-lg-5.searchinput.navbar-header
+                    div.input-group-btn
+                        select#NameSearch.form-control(onchange="sorter.search('query')" style="min-width:80px;padding:3px 10px;appearance:none; -moz-appearance:none; -webkit-appearance:none;background-size:20%;")
+                    input#query.form-control(type="text" placeholder="请输入商标名称" onkeyup="sorter.search('query')")
+                    span#SearchBtn.input-group-addon.btn.btn-info(onclick="sorter.search('query')") 查询
+            -var AllType = ['第1类-化学原料', '第2类-颜料油漆', '第3类-日化用品', '第4类-燃料油脂', '第5类-医药', '第6类-金属材料', '第7类-机械设备', '第8类-手工器械', '第9类-科学仪器', '第10类-医疗器械', '第11类-灯具空调', '第12类-运输工具', '第13类-军火烟火', '第14类-珠宝钟表', '第15类-乐器', '第16类-办公用品', '第17类-橡胶制品', '第18类-皮革皮具', '第19类-建筑材料', '第20类-家具', '第21类-厨房洁具', '第22类-绳网袋篷', '第23类-纱线丝', '第24类-布料床单', '第25类-服装鞋', '第26类-钮扣拉链', '第27类-地毯席垫', '第28类-健身器材', '第29类-食品', '第30类-方便食品', '第31类-饲料种籽', '第32类-啤酒饮料', '第33类-酒', '第34类-烟草烟具', '第35类-广告销售', '第36类-金融物管', '第37类-建筑修理', '第38类-通讯服务', '第39类-运输贮藏', '第40类-材料加工', '第41类-教育娱乐', '第42类-网站服务', '第43类-餐饮住宿', '第44类-医疗园艺', '第45类-社会服务']
+            ul.typelist.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                for val,index in AllType
+
+                    li.TypeItem(onclick="SelectType(this)")
+                        a(style="text-decoration:none")
+                            img(src="../img/typepage/" + (index + 1) + ".png" style="width:16px;height:16px;margin-right:10px")
+                            span=val
+            .information
+                table#messageTable.table.table-hover.table-bordered(style="margin-left: 15px;")
+                    thead
+                        tr.info
+                            th
+                                h3 序号
+                            for val in ["商标图样","商标名称","分类","注册号","注册产品"]
+                                th.nosort
+                                   h3=val
+                            th
+                                h3.VoteCountTh 注册日期
+                            th
+                                h3.VoteCountTh 价格
+                    tbody
+                        each val,index in message
+                            tr
+                                td=index + 1
+                                td
+                                    if val.imglogo
+                                        img(src="../" + val.imglogo  style="width: 40px;height: 40px;" )
+                                    else
+                                        span /
+                                td=val.name
+                                td=AllType[val.type - 1]
+                                td=val.mark
+                                td=val.production
+                                td=val.signdate
+                                td=val.saleprice+"元"
+            div.text-center.center-block(style="height:30px;line-height:30px")
+                    .col-lg-4.col-md-4.col-sm-4.col-xs-4 业务员名称：#{saleman.SaleManName}
+                    .col-lg-4.col-md-4.col-sm-4.col-xs-4 业务员手机：#{saleman.SaleManTel}
+                    .col-lg-4.col-md-4.col-sm-4.col-xs-4 业务员QQ：#{saleman.SaleManQQ}
+            #tablefooter.row.text-center.center-block(style="margin-left:15px;margin-top:20px;height:20px")
+                #tablenav.col-lg-4.col-md-4.col-sm-4.col-xs-4
+                    ul.pull-left
+                        li
+                            a(onclick="sorter.move(-1,true)" ) 首页
+                        li
+                            a(onclick="sorter.move(-1)" ) 上一页
+                        li
+                            a(onclick="sorter.move(1)")  下一页
+                        li
+                            a(onclick="sorter.move(1,true)") 尾页
+                    .page.pull-left
+                        |  当前第
+                        span
+                            strong#currentpage
+                        | 页/共
+                        span
+                            strong#totalpages
+                        | 页
+                .details.col-lg-4.col-md-4.col-sm-4.col-xs-4(style="margin-right: 16px;")
+                    div
+                        | 当前显示记录
+                        span#startrecord
+                        | -
+                        span#endrecord
+                        | 条
+                        | 总共
+                        span#totalrecords
+                        | 条
+                #tablelocation.col-lg-4.col-md-4.col-sm-4.col-xs-4.pull-right(style="margin-right: -30px;")
+                    div.pull-right
+                        select(onchange="sorter.size(this.value)" style="margin-right: 5px;")
+                            option(value="7" selected="selected") 7
+                            option(value="8") 8
+                            option(value="10") 10
+                            option(value="12") 12
+                            option(value="15") 15
+                            option(value="20") 20
+                            option(value="50") 50
+                            option(value="80") 80
+                        span(style="margin-right:7px") 每页显现数量
+                    div.pull-right(style="margin-right: 16px;")
+                        a#resetbtn(onclick="Reset()" ) 返回
+        div(style="width=100%")
+            div#company 由广州优易科技有限公司提供技术支持
+    script(type='text/javascript').
+        var typeflag = 0
+        var sorter = new TINY.table.sorter('sorter', 'messageTable', {
+            headclass: 'head',
+            ascclass: 'asc',
+            descclass: 'desc',
+            evenclass: 'evenrow',
+            oddclass: 'oddrow',
+            evenselclass: 'evenselected',
+            oddselclass: 'oddselected',
+            paginate: true,
+            startingrecid: 'startrecord',
+            endingrecid: 'endrecord',
+            totalrecid: 'totalrecords',
+            currentid: 'currentpage',
+            totalid: 'totalpages',
+            size: 7,
+            sortcolumn: 6,
+            sortdir: 1,
+            colddid: 'NameSearch',
+            navid: 'tablenav',
+            init: true
+        });
+        $(".TypeItem").on({
+            mouseover: function () {
+                $(this).children(":first").css("color", "red")
+            },
+            mouseout: function () {
+                $(this).children(":first").css("color", "#428bca")
+            },
+            click: function () {
+                typeflag = $('li').index($(this)) + 1
+                $('.TypeItem').on('mouseover', function () {
+                    $(this).children(":first").css("color", "red")
+                })
+                $('.TypeItem').on('mouseout', function () {
+                    $(this).children(":first").css("color", "#428bca")
+                })
+                $('.TypeItem').css("backgroundColor", "white")
+                $('.TypeItem a').css("color", "#428bca")
+                $(this).css("backgroundColor", "#428bca")
+                $(this).children(":first").css("color", "white")
+                $(this).off('mouseout');
+                $(this).off('mouseover');
+            }
+        })
+        var patt1 = new RegExp(/\d+/g);
+
+        function SelectType(ele) {
+            var LiIndex = $('li').index(ele) + 1;
+            $("#query")[0].value = "第" + LiIndex + "类-"
+            $("#SearchBtn").click()
+        }
+
+        $("tbody img").on("click", function () {
+            $(".bg").append('<img src=' + this.src + '>')
+            $(".bg").css("display", "block")
+        })
+        $(".bg").on("click", function () {
+            $(".bg").css("display", "none")
+            $(".bg img").remove()
+        })
+
+        var jiantouFlag2 = 1
+        var jiantouFlag = 1;
+        $("th:eq(6) h3").on("click", function () {
+            $("th:eq(7) h3").css('background-image', 'url(\"../images/sort.gif\")')
+            jiantouFlag = 1
+            if (jiantouFlag2 % 2 == 1) {
+                $(this).css('background-image', 'url(\"../images/asc.gif\")')
+                jiantouFlag2 = jiantouFlag2 + 1
+            }
+            else {
+                $(this).css('background-image', 'url(\"../images/desc.gif\")')
+                jiantouFlag2 = 1
+            }
+        })
+
+        $("th:eq(7) h3").on("click", function () {
+            $("th:eq(6) h3").css('background-image', 'url(\"../images/sort.gif\")')
+            jiantouFlag2=1
+            if (jiantouFlag % 2 == 1) {
+                $(this).css('background-image', 'url(\"../images/asc.gif\")')
+                jiantouFlag = jiantouFlag + 1
+            }
+            else {
+                $(this).css('background-image', 'url(\"../images/desc.gif\")')
+                jiantouFlag = 1
+            }
+
+        })
+        function Reset() {
+            $("#query")[0].value=""
+            $("#SearchBtn").click()
+        }
+
