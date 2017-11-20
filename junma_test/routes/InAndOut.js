@@ -66,6 +66,9 @@ exports.webLogin2 = (req, res) => {
     // });
 
 }
+
+
+
 exports.webLogin2 = (req, res) => {
     new Promise((resolve, reject) => {
         weduserfuc.findByNameAndPwd(req.body.username, req.body.password, UsersArr => {

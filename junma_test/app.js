@@ -55,7 +55,7 @@ app.use(flash());
  * DEMO的话passport官网有写，链接http://passportjs.org/docs
  */
 passport.use('local', new LocalStrategy(
-    InAndOut.webLogin
+    InAndOut.localLogin
     // function (username, password, done) {
     //     var user = {
     //         id: '1',
@@ -93,7 +93,14 @@ passport.deserializeUser(function (user, done) {
 
 
 //web登陆接口
-app.post('/home', InAndOut.webLogin)
+app.post('/home', function (req,res) {
+    console.log(req.body)
+    passport.authenticate('local',{
+        successRedirect: '/users',
+        failureRedirect: '/',
+        failureFlash : true
+    })
+})
 
 // app.use('/', index);
 // app.use('/users', users);
